@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://www.google.com/search?q=gmail&oq=gmail&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDI0MjFqMGoyqAIAsAIB&sourceid=chrome&ie=UTF-8');
+  await page.goto('https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dgmail%26oq%3Dgmail%26gs_lcrp%3DEgZjaHJvbWUyBggAEEUYOdIBCDI0MjFqMGoyqAIAsAIB%26sourceid%3Dchrome%26ie%3DUTF-8%26sei%3DnMvsavHiDMTFwPAP55WTuA4&q=EgS5SLpQGJyXs9cGIjAhXByykLDId26QTDDCaQ6wtpd0nd19q2Z2UGK1tWHP7IIMFFVR495laySvNjTT0scyAVJaAUNglrebyMz4z-PLAQ');
+  await page.locator('iframe[name="a-qloi5cb9of8h"]').contentFrame().getByRole('checkbox', { name: 'I\'m not a robot' }).click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().getByRole('button', { name: 'Verify' }).click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="1"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="2"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().getByRole('button', { name: 'Verify' }).click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="1"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="0"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().getByRole('button', { name: 'Verify' }).click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().getByRole('button', { name: 'Get a new challenge' }).click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="1"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="3"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="7"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="4"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().locator('[id="1"]').click();
+  await page.locator('iframe[name="c-qloi5cb9of8h"]').contentFrame().getByRole('button', { name: 'Verify' }).click();
+  await page.getByRole('button', { name: 'Zaakceptuj wszystko' }).click();
+  await page.getByRole('link', { name: 'Gmail - Google Google https' }).click();
+  await page.getByText('Create an account').nth(2).click();
+  await page.getByText('Create an account').nth(2).click();
+  await page.getByRole('button', { name: 'OK, got it' }).click();
+  await page.locator('section').filter({ hasText: 'AI-powered email for everyone' }).locator('summary').click();
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('menuitem', { name: 'Gmail - For my personal use' }).click();
+  const page1 = await page1Promise;
+  await page1.getByRole('textbox', { name: 'First name' }).click();
+  await page1.getByRole('textbox', { name: 'Last name (optional)' }).click();
+  await page1.getByRole('button', { name: 'Next' }).click();
+});
